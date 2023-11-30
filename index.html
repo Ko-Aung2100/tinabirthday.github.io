@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Party Animation</title>
+    <style>
+        body {
+            background-color: #e954b7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        #heart-container {
+            position: relative;
+            text-align: center;
+        }
+
+        #heart {
+            font-size: 5em;
+            color: #ff69b4; /* Hot Pink */
+            animation: heartbeat 1s infinite;
+        }
+
+        #text-top {
+            font-size: 2em;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        #text-bottom {
+            font-size: 2em;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .small-heart {
+            position: absolute;
+            font-size: 1em;
+            color: #fa294c; /* Hot Pink */
+            animation: flyHeart 3s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes flyHeart {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+
+        .heart {
+            width: 10px;
+            height: 10px;
+            background-color: pink;
+            position: absolute;
+            transform: rotate(45deg);
+            animation: heartBeat 1s infinite;
+            z-index: -1;
+        }
+
+        @keyframes heartBeat {
+            0% {
+                transform: scale(1) rotate(45deg);
+            }
+            50% {
+                transform: scale(1.3) rotate(45deg);
+            }
+            100% {
+                transform: scale(1) rotate(45deg);
+            }
+        }
+        #myAudio{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="heart-container">
+        <div id="text-top">Happy Birthday,Tina!</div>
+        <div id="heart">❤️</div>
+        <div class="small-heart">&#10084;</div>
+        <div class="small-heart">&#10084;</div>
+        <div class="small-heart">&#10084;</div>
+        <div id="text-bottom">We wish you be happy always!</div>
+    </div>
+
+  
+    <script>
+
+       
+        // This function creates and appends small hearts to the body
+        function createSmallHearts() {
+            const body = document.body;
+            const smallHeartCount = 30;
+
+            for (let i = 0; i < smallHeartCount; i++) {
+                const smallHeart = document.createElement('div');
+                smallHeart.className = 'small-heart';
+                smallHeart.style.left = Math.random() * 100 + 'vw';
+                smallHeart.style.animationDelay = Math.random() * 3 + 's';
+                body.appendChild(smallHeart);
+            }
+        }
+
+        // Run the function to create small hearts when the script is first loaded
+        createSmallHearts();
+
+       
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.top = Math.random() * window.innerHeight + 'px';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        document.body.appendChild(heart);
+    }
+
+    function createHearts(numHearts) {
+        for (let i = 0; i < numHearts; i++) {
+            createHeart();
+        }
+    }
+
+    // Create initial hearts
+    createHearts(10);
+
+    // Create more hearts every 2 seconds
+    const intervalId = setInterval(() => {
+        createHearts(5);
+    }, 2000);
+
+    // Stop creating hearts when the user presses any key
+    document.addEventListener('keydown', () => {
+        clearInterval(intervalId);
+    });
+    const audio = new Audio('https://drive.google.com/file/d/19frJENnEjEHzlW4AlKxql7aSmt9QcEow/view?usp=drive_link');
+
+// Play the audio when the page is loaded
+    window.addEventListener('load', () => {
+        audio.play();
+    });
+
+   
+    
+    </script>
+
+</body>
+</html>
